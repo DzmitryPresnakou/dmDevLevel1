@@ -9,6 +9,7 @@ package com.presnakou.functions;
 public class Exercise1 {
 
     public static void main(String[] args) {
+
         int minutes = 16;
         String test = whatQuarterOfAnHour(minutes);
         System.out.println(test);
