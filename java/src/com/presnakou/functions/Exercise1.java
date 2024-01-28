@@ -11,21 +11,20 @@ public class Exercise1 {
     public static void main(String[] args) {
 
         int minutes = 16;
-        String test = whatQuarterOfAnHour(minutes);
-        System.out.println(test);
+        whatQuarterOfAnHour(minutes);
     }
 
-    public static String whatQuarterOfAnHour(int minutes) {
+    public static void whatQuarterOfAnHour(int minutes) {
         if (0 <= minutes && minutes <= 15) {
-            return minutes + " minutes is the first quarter of an hour";
+            System.out.println(minutes + " minutes is the first quarter of an hour");
         } else if (16 <= minutes && minutes <= 30) {
-            return minutes + " minutes is the second quarter of an hour";
+            System.out.println(minutes + " minutes is the second quarter of an hour");
         } else if (31 <= minutes && minutes <= 45) {
-            return minutes + " minutes is the third quarter of an hour";
+            System.out.println(minutes + " minutes is the third quarter of an hour");
         } else if (46 <= minutes && minutes <= 59) {
-            return minutes + " minutes is the fourth quarter of an hour";
+            System.out.println(minutes + " minutes is the fourth quarter of an hour");
         } else {
-            return minutes + " minutes is invalid value";
+            System.out.println(minutes + " minutes is invalid value");
         }
     }
 }
