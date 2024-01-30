@@ -27,11 +27,11 @@ public class Exercise3 {
 
     }
 
-    public static double calculateTheAreaOfATriangle(double a, double b) {
+    private static double calculateTheAreaOfATriangle(double a, double b) {
         return (a * b) / 2;
     }
 
-    public static void compareAreaOfTriangles(double area1, double area2) {
+    private static void compareAreaOfTriangles(double area1, double area2) {
         if (area1 > area2) {
             System.out.println("the first triangle (" + area1 + ") is larger than the second (" + area2 + ")");
         } else if (area1 < area2) {

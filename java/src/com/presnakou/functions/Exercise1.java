@@ -10,21 +10,25 @@ public class Exercise1 {
 
     public static void main(String[] args) {
 
-        int minutes = 16;
+        int minutes = 15;
         whatQuarterOfAnHour(minutes);
     }
 
-    public static void whatQuarterOfAnHour(int minutes) {
-        if (0 <= minutes && minutes <= 15) {
+    private static void whatQuarterOfAnHour(int minutes) {
+        if (isRange(minutes, 0, 16)) {
             System.out.println(minutes + " minutes is the first quarter of an hour");
-        } else if (16 <= minutes && minutes <= 30) {
+        } else if (isRange(minutes, 16, 31)) {
             System.out.println(minutes + " minutes is the second quarter of an hour");
-        } else if (31 <= minutes && minutes <= 45) {
+        } else if (isRange(minutes, 31, 46)) {
             System.out.println(minutes + " minutes is the third quarter of an hour");
-        } else if (46 <= minutes && minutes <= 59) {
+        } else if (isRange(minutes, 46, 60)) {
             System.out.println(minutes + " minutes is the fourth quarter of an hour");
         } else {
             System.out.println(minutes + " minutes is invalid value");
         }
+    }
+
+    private static boolean isRange(int value, int begin, int endExcluded) {
+        return begin <= value && value < endExcluded;
     }
 }
