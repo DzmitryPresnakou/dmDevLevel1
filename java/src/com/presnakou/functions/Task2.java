@@ -14,7 +14,7 @@ package com.presnakou.functions;
  * Параметры: operand1 = 24.4, operand2 = 10.1, operation = ‘+’
  * Результат: 34.5 (24.4 + 10.1)
  */
-public class Exercise2 {
+public class Task2 {
 
     private final static char ADDITION = '+';
     private final static char SUBTRACTION = '-';

@@ -6,7 +6,7 @@ package com.presnakou.functions;
  * в какую четверть часа попадает это число (в первую, вторую, третью или четвертую).
  * Протестировать функцию в main.
  */
-public class Exercise1 {
+public class Task1 {
 
     public static void main(String[] args) {
 

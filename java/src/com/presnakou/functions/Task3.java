@@ -10,7 +10,7 @@ package com.presnakou.functions;
  * Вторая: сравнивает переданные площади двух треугольников и выводит на консоль первый треугольник больше, меньше или равен второму.
  * Учитывать, что площадь может быть вещественным числом.
  */
-public class Exercise3 {
+public class Task3 {
 
     public static void main(String[] args) {
 
