@@ -23,8 +23,8 @@ public class Task1 {
     }
 
     private static void printArray(int[] newArray) {
-        for (int i = 0; i < newArray.length; i++) {
-            System.out.print(newArray[i] + " ");
+        for (int i : newArray) {
+            System.out.print(i + " ");
         }
     }
 
