@@ -16,7 +16,8 @@ public class Flat {
     }
 
     public void print() {
-        System.out.println(toString());
+        System.out.println("Квартира " + number + ", количество комнат "
+                + rooms.length);
     }
 
     public int getNumber() {
@@ -53,9 +54,7 @@ public class Flat {
     @Override
     public String toString() {
         return "\nКвартира " + number + ", количество комнат "
-                + rooms.length + ",\nКомнаты: "
+                + rooms.length + ","
                 + Arrays.toString(rooms);
     }
-
-
 }

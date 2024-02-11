@@ -11,7 +11,7 @@ public class House {
     Floor[] floors;
 
     public void print() {
-        System.out.println(toString());
+        System.out.println("Дом " + number + ", количество этажей " + floors.length);
     }
 
     public House(int number, Floor[] floors) {
@@ -56,6 +56,6 @@ public class House {
     @Override
     public String toString() {
         return "Дом " + number + ", количество этажей " + floors.length
-                + ",\nЭтажи: " + Arrays.toString(floors);
+                + "," + Arrays.toString(floors);
     }
 }

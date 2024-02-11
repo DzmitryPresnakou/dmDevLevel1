@@ -19,7 +19,8 @@ public class Floor {
     }
 
     public void print() {
-        System.out.println(toString());
+        System.out.println("Этаж " + number + ", количество квартир "
+                + flats.length);
     }
 
     public int getNumber() {
@@ -56,7 +57,7 @@ public class Floor {
     @Override
     public String toString() {
         return "\nЭтаж " + number + ", количество квартир "
-                + flats.length + ",\nКвартиры: "
+                + flats.length + ","
                 + Arrays.toString(flats);
     }
 }

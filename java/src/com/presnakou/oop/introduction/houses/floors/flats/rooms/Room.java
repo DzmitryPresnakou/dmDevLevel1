@@ -6,7 +6,6 @@ public class Room {
 
     private boolean isPassageway;
 
-
     public Room(boolean isPassageway) {
         this.isPassageway = isPassageway;
     }
