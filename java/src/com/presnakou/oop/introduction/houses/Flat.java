@@ -1,14 +1,12 @@
-package com.presnakou.oop.introduction.houses.floors.flats;
-
-import com.presnakou.oop.introduction.houses.floors.flats.rooms.Room;
+package com.presnakou.oop.introduction.houses;
 
 import java.util.Arrays;
 import java.util.Objects;
 
 public class Flat {
 
-    int number;
-    Room[] rooms;
+    private int number;
+    private Room[] rooms;
 
     public Flat(int number, Room[] rooms) {
         this.number = number;

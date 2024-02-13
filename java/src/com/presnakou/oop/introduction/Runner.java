@@ -1,9 +1,9 @@
 package com.presnakou.oop.introduction;
 
+import com.presnakou.oop.introduction.houses.Flat;
+import com.presnakou.oop.introduction.houses.Floor;
 import com.presnakou.oop.introduction.houses.House;
-import com.presnakou.oop.introduction.houses.floors.Floor;
-import com.presnakou.oop.introduction.houses.floors.flats.Flat;
-import com.presnakou.oop.introduction.houses.floors.flats.rooms.Room;
+import com.presnakou.oop.introduction.houses.Room;
 
 import java.util.Arrays;
 

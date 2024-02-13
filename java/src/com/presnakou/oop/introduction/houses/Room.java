@@ -1,4 +1,4 @@
-package com.presnakou.oop.introduction.houses.floors.flats.rooms;
+package com.presnakou.oop.introduction.houses;
 
 import java.util.Objects;
 

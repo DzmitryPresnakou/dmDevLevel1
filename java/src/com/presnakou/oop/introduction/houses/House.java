@@ -1,14 +1,12 @@
 package com.presnakou.oop.introduction.houses;
 
-import com.presnakou.oop.introduction.houses.floors.Floor;
-
 import java.util.Arrays;
 import java.util.Objects;
 
 public class House {
 
-    int number;
-    Floor[] floors;
+    private int number;
+    private Floor[] floors;
 
     public void print() {
         System.out.println("Дом " + number + ", количество этажей " + floors.length);

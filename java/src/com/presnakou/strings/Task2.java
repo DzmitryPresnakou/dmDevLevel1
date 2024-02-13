@@ -15,6 +15,9 @@ package com.presnakou.strings;
  */
 public class Task2 {
 
+    public static final String DIGIT_STRING = "0123456789";
+    public static final int ZERO_IN_UNICODE = 48;
+
     public static void main(String[] args) {
 
         String string = "Привет 8, как 1 2 твои дела? Может4, сделать 3 дело?";
@@ -34,14 +37,14 @@ public class Task2 {
     }
 
     private static int[] getDigitsFromString(char[] charArray) {
-        String digitString = "0123456789";
-        int zeroInUnicode = 48;
-        int counter = counterOfDigitsInString(charArray, digitString);
+
+
+        int counter = counterOfDigitsInString(charArray, DIGIT_STRING);
 
         int[] digits = new int[counter];
         for (int i = 0, j = 0; i < charArray.length; i++) {
-            if (digitString.contains(String.valueOf(charArray[i]))) {
-                digits[j] = charArray[i] - zeroInUnicode;
+            if (DIGIT_STRING.contains(String.valueOf(charArray[i]))) {
+                digits[j] = charArray[i] - ZERO_IN_UNICODE;
                 j++;
             }
         }
