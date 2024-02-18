@@ -15,9 +15,6 @@ package com.presnakou.oop.principles.encapsulation.atm;
  * чтобы не усложнять алгоритм).
  */
 
-import com.presnakou.oop.principles.encapsulation.atm.money.Banknote;
-import com.presnakou.oop.principles.encapsulation.atm.money.Denomination;
-
 import java.util.Objects;
 
 public class Atm {
@@ -59,7 +56,6 @@ public class Atm {
         int currentNumberOfTenDollarBills = 0;
 
         if (getAmountOfMoney() - amountOfMoney < 0) {
-
             return false;
         }
 
