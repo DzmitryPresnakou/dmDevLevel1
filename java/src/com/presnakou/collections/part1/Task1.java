@@ -1,7 +1,8 @@
 package com.presnakou.collections.part1;
 
-import com.presnakou.collections.part1.comparator.ChatNumberOfUsersAndNameComparator;
-import com.presnakou.collections.part1.comparator.utils.ChatUtil;
+import com.presnakou.collections.part1.chat1.Chat;
+import com.presnakou.collections.part1.chat1.comparator.ChatNumberOfUsersAndNameComparator;
+import com.presnakou.collections.part1.chat1.utils.ChatHelper;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -38,7 +39,7 @@ public class Task1 {
         Collections.sort(chats);
         System.out.println(chats);
 
-        ChatUtil.removeChatsLessThanAThousandUsers(chats);
+        ChatHelper.removeChatsLessThanAThousandUsers(chats);
         System.out.println(chats);
 
         chats.sort(new ChatNumberOfUsersAndNameComparator());

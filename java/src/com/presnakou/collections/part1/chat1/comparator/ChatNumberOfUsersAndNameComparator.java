@@ -1,6 +1,6 @@
-package com.presnakou.collections.part1.comparator;
+package com.presnakou.collections.part1.chat1.comparator;
 
-import com.presnakou.collections.part1.Chat;
+import com.presnakou.collections.part1.chat1.Chat;
 
 import java.util.Comparator;
 

@@ -1,4 +1,4 @@
-package com.presnakou.collections.part1;
+package com.presnakou.collections.part1.chat1;
 
 import java.util.Objects;
 
