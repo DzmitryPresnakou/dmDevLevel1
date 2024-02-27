@@ -19,9 +19,9 @@ import java.util.Objects;
 
 public class Atm {
 
-    private final int DENOMINATION_OF_TEN_DOLLAR_BILL = 10;
-    private final int DENOMINATION_OF_TWENTY_DOLLAR_BILL = 20;
-    private final int DENOMINATION_OF_FIFTY_DOLLAR_BILL = 50;
+    private static final int DENOMINATION_OF_TEN_DOLLAR_BILL = 10;
+    private static final int DENOMINATION_OF_TWENTY_DOLLAR_BILL = 20;
+    private static final int DENOMINATION_OF_FIFTY_DOLLAR_BILL = 50;
     private int numberOfTenDollarBills;
     private int numberOfTwentyDollarBills;
     private int numberOfFiftyDollarBills;
@@ -33,21 +33,21 @@ public class Atm {
     }
 
     public void addMoney(int numberOfTenDollarBills, int numberOfTwentyDollarBills, int numberOfFiftyDollarBills) {
-        this.numberOfTenDollarBills = numberOfTenDollarBills;
-        this.numberOfTwentyDollarBills = numberOfTwentyDollarBills;
-        this.numberOfFiftyDollarBills = numberOfFiftyDollarBills;
+        this.numberOfTenDollarBills += numberOfTenDollarBills;
+        this.numberOfTwentyDollarBills += numberOfTwentyDollarBills;
+        this.numberOfFiftyDollarBills += numberOfFiftyDollarBills;
     }
 
     public void addTenDollarBills(int numberOfTenDollarBills) {
-        this.numberOfTenDollarBills = numberOfTenDollarBills;
+        this.numberOfTenDollarBills += numberOfTenDollarBills;
     }
 
     public void addTwentyDollarBills(int numberOfTwentyDollarBills) {
-        this.numberOfTwentyDollarBills = numberOfTwentyDollarBills;
+        this.numberOfTwentyDollarBills += numberOfTwentyDollarBills;
     }
 
     public void addFiftyDollarBills(int numberOfFiftyDollarBills) {
-        this.numberOfFiftyDollarBills = numberOfFiftyDollarBills;
+        this.numberOfFiftyDollarBills += numberOfFiftyDollarBills;
     }
 
     public boolean getMoney(int amountOfMoney) {
@@ -79,9 +79,9 @@ public class Atm {
                 currentNumberOfTwentyDollarBills * DENOMINATION_OF_TWENTY_DOLLAR_BILL +
                 currentNumberOfTenDollarBills * DENOMINATION_OF_TEN_DOLLAR_BILL) > 0);
         if (result) {
-            numberOfFiftyDollarBills -= currentNumberOfFiftyDollarBills;
-            numberOfTwentyDollarBills -= currentNumberOfTwentyDollarBills;
-            numberOfTenDollarBills -= currentNumberOfTenDollarBills;
+            this.numberOfFiftyDollarBills -= currentNumberOfFiftyDollarBills;
+            this.numberOfTwentyDollarBills -= currentNumberOfTwentyDollarBills;
+            this.numberOfTenDollarBills -= currentNumberOfTenDollarBills;
         }
         if (currentNumberOfFiftyDollarBills > 0) {
             printStatus(currentNumberOfFiftyDollarBills, DENOMINATION_OF_FIFTY_DOLLAR_BILL);
