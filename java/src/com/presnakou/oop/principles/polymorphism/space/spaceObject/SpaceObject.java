@@ -1,6 +1,4 @@
-package com.presnakou.oop.principles.polymorphism.space.objects;
-
-import java.util.Objects;
+package com.presnakou.oop.principles.polymorphism.space.spaceObject;
 
 public abstract class SpaceObject {
     private String name;

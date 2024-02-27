@@ -1,17 +1,19 @@
-package com.presnakou.oop.principles.polymorphism.space.objects;
+package com.presnakou.oop.principles.polymorphism.space.spaceObject.star;
+
+import com.presnakou.oop.principles.polymorphism.space.spaceObject.SpaceObject;
 
 import java.util.Objects;
 
-public class Star extends SpaceObject{
+public class Star extends SpaceObject {
 
-    private String type;
+    private StarType type;
     private long lengthOfCircle;
 
     public Star(String name, Long id, long mass) {
         super(name, id, mass);
     }
 
-    public Star(String name, Long id, long mass, String type, long lengthOfCircle) {
+    public Star(String name, Long id, long mass, StarType type, long lengthOfCircle) {
         super(name, id, mass);
         this.type = type;
         this.lengthOfCircle = lengthOfCircle;
@@ -27,11 +29,11 @@ public class Star extends SpaceObject{
         return Long.compare(this.getMass(), spaceObject.getMass());
     }
 
-    public String getType() {
+    public StarType getType() {
         return type;
     }
 
-    public void setType(String type) {
+    public void setType(StarType type) {
         this.type = type;
     }
 
@@ -48,7 +50,7 @@ public class Star extends SpaceObject{
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Star star = (Star) o;
-        return lengthOfCircle == star.lengthOfCircle && Objects.equals(type, star.type);
+        return lengthOfCircle == star.lengthOfCircle && type == star.type;
     }
 
     @Override
@@ -59,8 +61,8 @@ public class Star extends SpaceObject{
     @Override
     public String toString() {
         return "Star{" +
-                "type='" + type + '\'' +
+                "type=" + type +
                 ", lengthOfCircle=" + lengthOfCircle +
-                '}';
+                "} " + super.toString();
     }
 }

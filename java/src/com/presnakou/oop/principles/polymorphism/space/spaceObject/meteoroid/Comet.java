@@ -1,20 +1,18 @@
-package com.presnakou.oop.principles.polymorphism.space.objects;
+package com.presnakou.oop.principles.polymorphism.space.spaceObject.meteoroid;
+
+import com.presnakou.oop.principles.polymorphism.space.spaceObject.SpaceObject;
 
 import java.util.Objects;
 
-public class Asteroid extends SpaceObject {
+public class Comet extends SpaceObject {
 
-    private boolean isHasASatellite;
+    private long tailLength;
     private long length;
     private long height;
 
-    public Asteroid(String name, Long id, long mass) {
+    public Comet(String name, Long id, long mass, long tailLength, long length, long height) {
         super(name, id, mass);
-    }
-
-    public Asteroid(String name, Long id, long mass, boolean isHasASatellite, long length, long height) {
-        super(name, id, mass);
-        this.isHasASatellite = isHasASatellite;
+        this.tailLength = tailLength;
         this.length = length;
         this.height = height;
     }
@@ -24,21 +22,21 @@ public class Asteroid extends SpaceObject {
         return 2 * Math.sqrt(calculateSquare() / Math.PI);
     }
 
-    private long calculateSquare() {
-        return length * height;
-    }
-
     @Override
     public int compareMasses(SpaceObject spaceObject) {
         return Long.compare(this.getMass(), spaceObject.getMass());
     }
 
-    public boolean isHasASatellite() {
-        return isHasASatellite;
+    private long calculateSquare() {
+        return length * height;
     }
 
-    public void setHasASatellite(boolean hasASatellite) {
-        isHasASatellite = hasASatellite;
+    public long getTailLength() {
+        return tailLength;
+    }
+
+    public void setTailLength(long tailLength) {
+        this.tailLength = tailLength;
     }
 
     public long getLength() {
@@ -61,23 +59,21 @@ public class Asteroid extends SpaceObject {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Asteroid asteroid = (Asteroid) o;
-        return isHasASatellite == asteroid.isHasASatellite && length == asteroid.length && height == asteroid.height;
+        Comet comet = (Comet) o;
+        return tailLength == comet.tailLength && length == comet.length && height == comet.height;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(isHasASatellite, length, height);
+        return Objects.hash(tailLength, length, height);
     }
 
     @Override
     public String toString() {
-        return "Asteroid{" +
-                "isHasASatellite=" + isHasASatellite +
+        return "Comet{" +
+                "tailLength=" + tailLength +
                 ", length=" + length +
                 ", height=" + height +
                 '}';
     }
 }
-
-

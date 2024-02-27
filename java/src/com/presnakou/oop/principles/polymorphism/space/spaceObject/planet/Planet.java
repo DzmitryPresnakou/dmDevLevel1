@@ -1,4 +1,8 @@
-package com.presnakou.oop.principles.polymorphism.space.objects;
+package com.presnakou.oop.principles.polymorphism.space.spaceObject.planet;
+
+import com.presnakou.oop.principles.polymorphism.space.spaceObject.MovingOwnOrbit;
+import com.presnakou.oop.principles.polymorphism.space.spaceObject.RotatingOnAxis;
+import com.presnakou.oop.principles.polymorphism.space.spaceObject.SpaceObject;
 
 import java.util.Objects;
 
@@ -8,15 +12,18 @@ public class Planet extends SpaceObject implements RotatingOnAxis, MovingOwnOrbi
     private boolean isInhabited;
     private long lengthOfCircle;
 
+    private PlanetType type;
+
     public Planet(String name, Long id, long mass) {
         super(name, id, mass);
     }
 
-    public Planet(String name, Long id, long mass, long weight, boolean isInhabited, long lengthOfCircle) {
+    public Planet(String name, Long id, long mass, long weight, boolean isInhabited, long lengthOfCircle, PlanetType type) {
         super(name, id, mass);
         this.weight = weight;
         this.isInhabited = isInhabited;
         this.lengthOfCircle = lengthOfCircle;
+        this.type = type;
     }
 
     @Override
@@ -63,17 +70,25 @@ public class Planet extends SpaceObject implements RotatingOnAxis, MovingOwnOrbi
         this.lengthOfCircle = lengthOfCircle;
     }
 
+    public PlanetType getType() {
+        return type;
+    }
+
+    public void setType(PlanetType type) {
+        this.type = type;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Planet planet = (Planet) o;
-        return weight == planet.weight && isInhabited == planet.isInhabited && lengthOfCircle == planet.lengthOfCircle;
+        return weight == planet.weight && isInhabited == planet.isInhabited && lengthOfCircle == planet.lengthOfCircle && type == planet.type;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(weight, isInhabited, lengthOfCircle);
+        return Objects.hash(weight, isInhabited, lengthOfCircle, type);
     }
 
     @Override
@@ -82,6 +97,7 @@ public class Planet extends SpaceObject implements RotatingOnAxis, MovingOwnOrbi
                 "weight=" + weight +
                 ", isInhabited=" + isInhabited +
                 ", lengthOfCircle=" + lengthOfCircle +
-                '}';
+                ", type=" + type +
+                "} " + super.toString();
     }
 }

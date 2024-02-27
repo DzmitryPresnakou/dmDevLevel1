@@ -1,4 +1,4 @@
-package com.presnakou.oop.principles.polymorphism.space.objects;
+package com.presnakou.oop.principles.polymorphism.space.spaceObject.meteoroid;
 
 import java.util.Objects;
 

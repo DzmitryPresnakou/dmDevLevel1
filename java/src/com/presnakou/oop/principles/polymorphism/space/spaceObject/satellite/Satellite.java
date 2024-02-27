@@ -1,4 +1,7 @@
-package com.presnakou.oop.principles.polymorphism.space.objects;
+package com.presnakou.oop.principles.polymorphism.space.spaceObject.satellite;
+
+import com.presnakou.oop.principles.polymorphism.space.spaceObject.RotatingOnAxis;
+import com.presnakou.oop.principles.polymorphism.space.spaceObject.SpaceObject;
 
 import java.util.Objects;
 

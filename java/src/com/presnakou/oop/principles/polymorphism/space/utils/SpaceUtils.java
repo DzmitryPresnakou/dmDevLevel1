@@ -1,7 +1,7 @@
 package com.presnakou.oop.principles.polymorphism.space.utils;
 
-import com.presnakou.oop.principles.polymorphism.space.objects.SpaceObject;
-import com.presnakou.oop.principles.polymorphism.space.objects.Star;
+import com.presnakou.oop.principles.polymorphism.space.spaceObject.SpaceObject;
+import com.presnakou.oop.principles.polymorphism.space.spaceObject.star.Star;
 
 public final class SpaceUtils {
 
@@ -16,7 +16,7 @@ public final class SpaceUtils {
                 ((double) secondObject.getMass() / firstObject.getMass()));
     }
 
-    public static boolean isStar(SpaceObject firstObject) {
-        return firstObject instanceof Star;
+    public static boolean isStar(SpaceObject spaceObject) {
+        return spaceObject instanceof Star;
     }
 }
