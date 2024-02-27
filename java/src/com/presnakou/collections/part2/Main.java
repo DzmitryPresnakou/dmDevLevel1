@@ -30,6 +30,8 @@ package com.presnakou.collections.part2;
  * Продемонстрировать работу кинотеатра в отдельном классе.
  */
 
+import com.presnakou.collections.part2.utils.Genre;
+import com.presnakou.collections.part2.utils.Month;
 import com.presnakou.collections.part2.utils.MovieUtil;
 
 import java.util.HashSet;
@@ -41,26 +43,26 @@ public class Main {
 
         Cinema cinema = new Cinema(new LinkedHashMap<Integer, HashSet<Movie>>());
 
-        cinema.addMovie(new Movie(1, 1990, 10, "comedy", 7.4));
-        cinema.addMovie(new Movie(2, 1991, 8, "drama", 5.2));
-        cinema.addMovie(new Movie(3, 1992, 3, "fiction", 4.8));
-        cinema.addMovie(new Movie(4, 2000, 2, "detective", 8.1));
-        cinema.addMovie(new Movie(5, 2000, 8, "thriller", 6.6));
-        cinema.addMovie(new Movie(6, 2000, 12, "music", 7.2));
-        cinema.addMovie(new Movie(7, 2005, 10, "historic", 7.7));
-        cinema.addMovie(new Movie(8, 2005, 6, "fiction", 5.9));
-        cinema.addMovie(new Movie(9, 2010, 11, "drama", 6.8));
-        cinema.addMovie(new Movie(10, 2010, 1, "thriller", 8.0));
-        cinema.addMovie(new Movie(11, 2003, 5, "comedy", 4.9));
-        cinema.addMovie(new Movie(12, 2009, 4, "thriller", 6.0));
-        cinema.addMovie(new Movie(13, 2020, 9, "comedy", 7.0));
-        cinema.addMovie(new Movie(14, 2021, 7, "fiction", 6.7));
-        cinema.addMovie(new Movie(15, 2021, 8, "drama", 6.9));
+        cinema.addMovie(new Movie(1, 1990, Month.OCTOBER, Genre.COMEDY, 7.4));
+        cinema.addMovie(new Movie(2, 1991, Month.AUGUST, Genre.DRAMA, 5.2));
+        cinema.addMovie(new Movie(3, 1992, Month.MARCH, Genre.FICTION, 4.8));
+        cinema.addMovie(new Movie(4, 2000, Month.FEBRUARY, Genre.DETECTIVE, 8.1));
+        cinema.addMovie(new Movie(5, 2000, Month.AUGUST, Genre.THRILLER, 6.6));
+        cinema.addMovie(new Movie(6, 2000, Month.DECEMBER, Genre.MUSIC, 7.2));
+        cinema.addMovie(new Movie(7, 2005, Month.OCTOBER, Genre.HISTORICAL, 7.7));
+        cinema.addMovie(new Movie(8, 2005, Month.JUNE, Genre.FICTION, 5.9));
+        cinema.addMovie(new Movie(9, 2010, Month.NOVEMBER, Genre.DRAMA, 6.8));
+        cinema.addMovie(new Movie(10, 2010, Month.JANUARY, Genre.THRILLER, 8.0));
+        cinema.addMovie(new Movie(11, 2003, Month.MAY, Genre.COMEDY, 4.9));
+        cinema.addMovie(new Movie(12, 2009, Month.APRIL, Genre.THRILLER, 6.0));
+        cinema.addMovie(new Movie(13, 2020, Month.SEPTEMBER, Genre.COMEDY, 7.0));
+        cinema.addMovie(new Movie(14, 2021, Month.JULY, Genre.FANTASTIC, 6.7));
+        cinema.addMovie(new Movie(15, 2021, Month.AUGUST, Genre.DETECTIVE, 6.9));
 
         System.out.println(cinema);
-        System.out.println(cinema.getMoviesByYear(2000));
-        System.out.println(cinema.getMoviesByYearAndMonth(2010, 11));
-        System.out.println(cinema.getMoviesByGenre("comedy"));
+        System.out.println(MovieUtil.getMoviesByYear(cinema, 2000));
+        System.out.println(MovieUtil.getMoviesByYearAndMonth(cinema, 2010, Month.NOVEMBER));
+        System.out.println(MovieUtil.getMoviesByGenre(cinema, Genre.COMEDY));
         System.out.println(MovieUtil.getRatingTopTenInDescendingOrder(cinema));
     }
 }

@@ -1,16 +1,19 @@
 package com.presnakou.collections.part2;
 
+import com.presnakou.collections.part2.utils.Genre;
+import com.presnakou.collections.part2.utils.Month;
+
 import java.util.Objects;
 
 public class Movie {
 
-    private int id;
-    private int year;
-    private int month;
-    private String genre;
-    private double rating;
+    private Integer id;
+    private Integer year;
+    private Month month;
+    private Genre genre;
+    private Double rating;
 
-    public Movie(int id, int year, int month, String genre, double rating) {
+    public Movie(Integer id, Integer year, Month month, Genre genre, Double rating) {
         this.id = id;
         this.year = year;
         this.month = month;
@@ -18,43 +21,43 @@ public class Movie {
         this.rating = rating;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
-    public int getYear() {
+    public Integer getYear() {
         return year;
     }
 
-    public void setYear(int year) {
+    public void setYear(Integer year) {
         this.year = year;
     }
 
-    public int getMonth() {
+    public Month getMonth() {
         return month;
     }
 
-    public void setMonth(int month) {
+    public void setMonth(Month month) {
         this.month = month;
     }
 
-    public String getGenre() {
+    public Genre getGenre() {
         return genre;
     }
 
-    public void setGenre(String genre) {
+    public void setGenre(Genre genre) {
         this.genre = genre;
     }
 
-    public double getRating() {
+    public Double getRating() {
         return rating;
     }
 
-    public void setRating(double rating) {
+    public void setRating(Double rating) {
         this.rating = rating;
     }
 
@@ -63,7 +66,7 @@ public class Movie {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Movie movie = (Movie) o;
-        return id == movie.id && year == movie.year && month == movie.month && Double.compare(rating, movie.rating) == 0 && Objects.equals(genre, movie.genre);
+        return Objects.equals(id, movie.id) && Objects.equals(year, movie.year) && month == movie.month && genre == movie.genre && Objects.equals(rating, movie.rating);
     }
 
     @Override
@@ -73,12 +76,12 @@ public class Movie {
 
     @Override
     public String toString() {
-        return "\nMovie{" +
+        return "Movie{" +
                 "id=" + id +
                 ", year=" + year +
                 ", month=" + month +
-                ", genre='" + genre + '\'' +
+                ", genre=" + genre +
                 ", rating=" + rating +
-                '}' + "\n";
+                '}';
     }
 }

@@ -5,9 +5,9 @@ import java.util.Objects;
 public class Chat implements Comparable<Chat> {
 
     private String name;
-    private int numberOfUsers;
+    private Integer numberOfUsers;
 
-    public Chat(String name, int numberOfUsers) {
+    public Chat(String name, Integer numberOfUsers) {
         this.name = name;
         this.numberOfUsers = numberOfUsers;
     }
@@ -20,11 +20,11 @@ public class Chat implements Comparable<Chat> {
         this.name = name;
     }
 
-    public int getNumberOfUsers() {
+    public Integer getNumberOfUsers() {
         return numberOfUsers;
     }
 
-    public void setNumberOfUsers(int numberOfUsers) {
+    public void setNumberOfUsers(Integer numberOfUsers) {
         this.numberOfUsers = numberOfUsers;
     }
 
