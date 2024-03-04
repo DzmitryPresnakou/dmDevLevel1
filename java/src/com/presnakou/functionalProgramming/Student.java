@@ -18,6 +18,11 @@ public class Student {
         this.gradeList = gradeList;
     }
 
+    public Student(String name, String surname) {
+        this.name = name;
+        this.surname = surname;
+    }
+
     public String getName() {
         return name;
     }

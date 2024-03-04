@@ -3,6 +3,7 @@ package com.presnakou.functionalProgramming;
 import com.presnakou.functionalProgramming.utils.StudentUtil;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 import static java.util.stream.Collectors.*;
 
@@ -65,9 +66,16 @@ public class StudentRunner {
                 .collect(groupingBy(Student::getCourseNumber,
                         mapping(Student::getFullName, toList())));
 
+        Map<Integer, List<Student>> studentsList2 = students.stream()
+                .sorted(Comparator.comparing(Student::getFullName))
+                .collect(groupingBy(Student::getCourseNumber,
+                        mapping(s -> new Student(s.getName(), s.getSurname()), Collectors.toList())));
+
         System.out.println("Ключ - номер курса,\nзначение - средняя оценка студентов этого курса,\n" +
                 "количество оценок у которых больше 3-х\n" + averageGrade);
         System.out.println("Ключ - номер курса,\nзначение - список студентов данного курса\n" +
                 "но только с полями Имя и Фамилия\n" + studentsList);
+        System.out.println("Ключ - номер курса,\nзначение - список студентов данного курса\n" +
+                "но только с полями Имя и Фамилия\n" + studentsList2);
     }
 }
