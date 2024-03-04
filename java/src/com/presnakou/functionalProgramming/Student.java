@@ -66,11 +66,16 @@ public class Student {
 
     @Override
     public String toString() {
-        return "Student{" +
+        return (courseNumber != null && gradeList!= null) ?
+                ("Student{" +
                 "name='" + name + '\'' +
                 ", surname='" + surname + '\'' +
                 ", courseNumber=" + courseNumber +
                 ", gradeList=" + gradeList +
-                '}';
+                '}') :
+                ("Student{" +
+                        "name='" + name + '\'' +
+                        ", surname='" + surname +
+                        '}');
     }
 }
