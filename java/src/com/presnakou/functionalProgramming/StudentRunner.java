@@ -56,26 +56,25 @@ public class StudentRunner {
 
         List<Student> students = List.of(vasya, masha, kolya, ivan, valera, semen, vova, katya, yulya, petr, misha);
 
-        Map<Integer, Double> averageGrade = students.stream()
-                .filter(student -> student.getGradeList().size() > 3)
-                .collect(groupingBy(Student::getCourseNumber,
-                        mapping(StudentUtil::getAverageGrade, averagingDouble(Double::doubleValue))));
+        Map<Integer, Double> averageGrade = StudentUtil.getAverageGrade(students);
 
-        Map<Integer, List<String>> studentsList = students.stream()
-                .sorted(Comparator.comparing(Student::getFullName))
-                .collect(groupingBy(Student::getCourseNumber,
-                        mapping(Student::getFullName, toList())));
+        Map<Integer, List<String>> studentsListByFullName = StudentUtil.getStudentsListByFullName(students);
 
-        Map<Integer, List<Student>> studentsList2 = students.stream()
-                .sorted(Comparator.comparing(Student::getFullName))
-                .collect(groupingBy(Student::getCourseNumber,
-                        mapping(s -> new Student(s.getName(), s.getSurname()), Collectors.toList())));
+        Map<Integer, List<Student>> studentsListByNameAndSurname = StudentUtil.getStudentsListByNameAndSurname(students);
+
+        Map<Integer, Report> courseAndStudentNamesWithAverageGrade = StudentUtil.getCourseAndStudentNamesWithAverageGrade(studentsListByFullName, students);
 
         System.out.println("Ключ - номер курса,\nзначение - средняя оценка студентов этого курса,\n" +
                 "количество оценок у которых больше 3-х\n" + averageGrade);
+
         System.out.println("Ключ - номер курса,\nзначение - список студентов данного курса\n" +
-                "но только с полями Имя и Фамилия\n" + studentsList);
+                "но только с полями Имя и Фамилия\n" + studentsListByFullName);
+
         System.out.println("Ключ - номер курса,\nзначение - список студентов данного курса\n" +
-                "но только с полями Имя и Фамилия\n" + studentsList2);
+                "но только с полями Имя и Фамилия\n" + studentsListByNameAndSurname);
+
+        System.out.println("Ключ - номер курса,\nзначение - Объект с двумя полями:\n" +
+                " - Отсортированный список студентов с пункта 2\n" +
+                " - Средняя оценка этих студентов\n" + courseAndStudentNamesWithAverageGrade);
     }
 }
