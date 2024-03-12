@@ -12,44 +12,34 @@ public final class FileHelper {
     private static final String COMMA_DELIMITER = ",";
     private static final Path RESULT_PATH = Path.of("resources", "result.csv");
     private static final Path ERRORS_PATH = Path.of("resources", "errors.csv");
+    private static final int ID = 0;
+    private static final int PRICE_OR_NAME = 1;
 
     private FileHelper() {
     }
 
     public static LinkedHashMap<String, String> getPrices(File itemsPrice) {
-        LinkedHashMap<String, String> prices = new LinkedHashMap<>();
-        try (BufferedReader br = new BufferedReader(new FileReader(itemsPrice))) {
-            String line;
-            while ((line = br.readLine()) != null) {
-                String[] values = line.split(COMMA_DELIMITER);
-                if (values.length > 1) {
-                    prices.put(values[0], (values[1]));
-                } else {
-                    prices.put(values[0], null);
-                }
-            }
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        return prices;
+        return getDataFromFile(itemsPrice);
     }
 
     public static LinkedHashMap<String, String> getNames(File itemsName) {
-        LinkedHashMap<String, String> names = new LinkedHashMap<>();
-        try (BufferedReader br = new BufferedReader(new FileReader(itemsName))) {
+        return getDataFromFile(itemsName);
+    }
+
+    private static LinkedHashMap<String, String> getDataFromFile(File file) {
+        LinkedHashMap<String, String> data = new LinkedHashMap<>();
+        try (BufferedReader br = new BufferedReader(new FileReader(file))) {
             String line;
             while ((line = br.readLine()) != null) {
                 String[] values = line.split(COMMA_DELIMITER);
-                if (values.length > 1) {
-                    names.put((values[0]), (values[1]));
-                } else {
-                    names.put(values[0], null);
-                }
+                String key = values[ID];
+                String value = (values.length > 1) ? values[PRICE_OR_NAME] : null;
+                data.put(key, value);
             }
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        return names;
+        return data;
     }
 
     public static List<String> mergeValuesAndWriteInFile(File itemsPrice, File itemsName) throws IOException {
