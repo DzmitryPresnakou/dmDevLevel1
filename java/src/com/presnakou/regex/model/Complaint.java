@@ -7,7 +7,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 
 public class Complaint {
-        private static long ID = 0;
+    private static long ID = 0;
     private long id;
     private LocalDateTime time;
     private String fullName;

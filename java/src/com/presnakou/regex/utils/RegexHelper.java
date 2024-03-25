@@ -28,9 +28,7 @@ public final class RegexHelper {
     private static final Path RESULT_PATH = Path.of("resources", "processed complaints.csv");
     public static final DateTimeFormatter FORMATTER = DateTimeFormatter.ISO_LOCAL_DATE_TIME;
     public static final DateTimeFormatter NEW_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-    private static final String TIME_REGEX = "(\\d{4}-\\d{2}-\\d{2})T(\\d{2}):(\\d{2}):(\\d{2})";
     private static final String PHONE_REGEX = "(\\+375)*\\s*(\\d{2})\\s*(\\d{3})\\s*(\\d{2})\\s*(\\d{2})";
-
 
     private RegexHelper() {
     }
@@ -45,7 +43,8 @@ public final class RegexHelper {
                 String time = values[TIME].trim();
                 String phoneNumber = values[PHONE_NUMBER].trim();
                 Complaint complaint =
-                        new Complaint(id, LocalDateTime.parse(time, FORMATTER), values[FULL_NAME], correctPhoneNumber(phoneNumber), values[DESCRIPTION]);
+                        new Complaint(id, LocalDateTime.parse(time, FORMATTER), values[FULL_NAME],
+                                correctPhoneNumber(phoneNumber), values[DESCRIPTION]);
                 data.add(complaint);
             }
         } catch (IOException e) {
@@ -54,36 +53,23 @@ public final class RegexHelper {
         return data;
     }
 
-    private static String correctTime(String time) {
-        return time.replaceAll(TIME_REGEX, "$1 $2:$3");
-    }
-
     private static String correctPhoneNumber(String phoneNumber) {
         return phoneNumber.replaceAll(PHONE_REGEX, "+375 ($2) $3-$4-$5");
     }
 
-    public static List<String> processedAndwriteInFile(File file) {
+    public static String processedString(List<Complaint> complaints) {
+        return complaints.get(0).getId() + ", "
+                + getTimeDateNow(NEW_FORMATTER) + ", "
+                + complaints.get(0).getPhoneNumber().trim();
+    }
 
-        List<Complaint> complaints = getDataFromFile(file);
-        List<String> processedComplaints = new ArrayList<>();
-
-        for (Complaint complaint : complaints) {
-            String newString = complaint.getId() + ", "
-                    + getTimeDateNow(NEW_FORMATTER) + ", "
-                    + complaint.getPhoneNumber().trim();
-            processedComplaints.add(newString);
-            writeString(newString, RESULT_PATH);
-        }
-        return processedComplaints;
+    public static void writeStringInFile(String processedComplaint) {
+        writeString(processedComplaint, RESULT_PATH);
     }
 
     public static String getTimeDateNow(DateTimeFormatter formatter) {
         String timeDateNow = formatter.format(ZonedDateTime.now().truncatedTo(ChronoUnit.SECONDS));
         return timeDateNow;
-    }
-
-    public static void writeFile(List<String> list, Path path) throws IOException {
-        Files.write(path, list);
     }
 
     public static void writeString(String s, Path path) {
@@ -99,7 +85,7 @@ public final class RegexHelper {
                 + ", " + complaint.getFullName() + ", " + correctPhoneNumber(complaint.getPhoneNumber())
                 + ", " + complaint.getDescription();
         try {
-            Files.writeString(path, result + System.lineSeparator(), CREATE, APPEND);
+            Files.writeString(path, result, CREATE, APPEND);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
