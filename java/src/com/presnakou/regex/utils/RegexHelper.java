@@ -9,14 +9,14 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
+import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeFormatterBuilder;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
+
+import static java.nio.file.StandardOpenOption.APPEND;
+import static java.nio.file.StandardOpenOption.CREATE;
 
 public final class RegexHelper {
     private static final String COMMA_DELIMITER = ",";
@@ -26,9 +26,10 @@ public final class RegexHelper {
     private static final int PHONE_NUMBER = 3;
     private static final int DESCRIPTION = 4;
     private static final Path RESULT_PATH = Path.of("resources", "processed complaints.csv");
-    private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ISO_LOCAL_DATE_TIME;
-
+    public static final DateTimeFormatter FORMATTER = DateTimeFormatter.ISO_LOCAL_DATE_TIME;
+    public static final DateTimeFormatter NEW_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
     private static final String TIME_REGEX = "(\\d{4}-\\d{2}-\\d{2})T(\\d{2}):(\\d{2}):(\\d{2})";
+    private static final String PHONE_REGEX = "(\\+375)*\\s*(\\d{2})\\s*(\\d{3})\\s*(\\d{2})\\s*(\\d{2})";
 
 
     private RegexHelper() {
@@ -42,8 +43,9 @@ public final class RegexHelper {
                 String[] values = line.split(COMMA_DELIMITER);
                 Long id = Long.parseLong(values[ID]);
                 String time = values[TIME].trim();
+                String phoneNumber = values[PHONE_NUMBER].trim();
                 Complaint complaint =
-                        new Complaint(id, LocalDateTime.parse(time, FORMATTER), values[FULL_NAME], values[PHONE_NUMBER], values[DESCRIPTION]);
+                        new Complaint(id, LocalDateTime.parse(time, FORMATTER), values[FULL_NAME], correctPhoneNumber(phoneNumber), values[DESCRIPTION]);
                 data.add(complaint);
             }
         } catch (IOException e) {
@@ -56,27 +58,51 @@ public final class RegexHelper {
         return time.replaceAll(TIME_REGEX, "$1 $2:$3");
     }
 
+    private static String correctPhoneNumber(String phoneNumber) {
+        return phoneNumber.replaceAll(PHONE_REGEX, "+375 ($2) $3-$4-$5");
+    }
+
     public static List<String> processedAndwriteInFile(File file) {
 
         List<Complaint> complaints = getDataFromFile(file);
         List<String> processedComplaints = new ArrayList<>();
 
         for (Complaint complaint : complaints) {
-            processedComplaints.add(complaint.getId() + ", "
-            + correctTime(complaint.getTime().toString()) + ", "
-            + complaint.getPhoneNumber().trim());
-        }
-
-        try {
-            writeFile(processedComplaints, RESULT_PATH);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
+            String newString = complaint.getId() + ", "
+                    + getTimeDateNow(NEW_FORMATTER) + ", "
+                    + complaint.getPhoneNumber().trim();
+            processedComplaints.add(newString);
+            writeString(newString, RESULT_PATH);
         }
         return processedComplaints;
     }
 
+    public static String getTimeDateNow(DateTimeFormatter formatter) {
+        String timeDateNow = formatter.format(ZonedDateTime.now().truncatedTo(ChronoUnit.SECONDS));
+        return timeDateNow;
+    }
+
     public static void writeFile(List<String> list, Path path) throws IOException {
         Files.write(path, list);
+    }
+
+    public static void writeString(String s, Path path) {
+        try {
+            Files.writeString(path, s + System.lineSeparator(), CREATE, APPEND);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static void writeNewComplaint(Complaint complaint, Path path) {
+        String result = "\n" + complaint.getId() + ", " + getTimeDateNow(FORMATTER)
+                + ", " + complaint.getFullName() + ", " + correctPhoneNumber(complaint.getPhoneNumber())
+                + ", " + complaint.getDescription();
+        try {
+            Files.writeString(path, result + System.lineSeparator(), CREATE, APPEND);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
 }
