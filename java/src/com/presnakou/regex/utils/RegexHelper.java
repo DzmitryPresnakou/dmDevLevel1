@@ -29,6 +29,7 @@ public final class RegexHelper {
     public static final DateTimeFormatter FORMATTER = DateTimeFormatter.ISO_LOCAL_DATE_TIME;
     public static final DateTimeFormatter NEW_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
     private static final String PHONE_REGEX = "(\\+375)*\\s*(\\d{2})\\s*(\\d{3})\\s*(\\d{2})\\s*(\\d{2})";
+    private static final int CUSTOMER_ID = 0;
 
     private RegexHelper() {
     }
@@ -48,7 +49,7 @@ public final class RegexHelper {
                 data.add(complaint);
             }
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            e.printStackTrace();
         }
         return data;
     }
@@ -60,7 +61,7 @@ public final class RegexHelper {
     public static String processedString(List<Complaint> complaints) {
         return complaints.get(0).getId() + ", "
                 + getTimeDateNow(NEW_FORMATTER) + ", "
-                + complaints.get(0).getPhoneNumber().trim();
+                + complaints.get(CUSTOMER_ID).getPhoneNumber().trim();
     }
 
     public static void writeStringInFile(String processedComplaint) {
@@ -68,8 +69,7 @@ public final class RegexHelper {
     }
 
     public static String getTimeDateNow(DateTimeFormatter formatter) {
-        String timeDateNow = formatter.format(ZonedDateTime.now().truncatedTo(ChronoUnit.SECONDS));
-        return timeDateNow;
+        return formatter.format(ZonedDateTime.now().truncatedTo(ChronoUnit.SECONDS));
     }
 
     public static void writeString(String s, Path path) {

@@ -7,7 +7,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 
 public class Complaint {
-    private static long ID = 0;
+    private static long CLASS_ID = 0;
     private long id;
     private LocalDateTime time;
     private String fullName;
@@ -15,8 +15,8 @@ public class Complaint {
     private String description;
 
     public Complaint(long id, LocalDateTime time, String fullName, String phoneNumber, String description) {
-        ID++;
-        this.id = Math.max(id, ID);
+        CLASS_ID++;
+        this.id = Math.max(id, CLASS_ID);
         this.time = time;
         this.fullName = fullName;
         this.phoneNumber = phoneNumber;
@@ -24,8 +24,8 @@ public class Complaint {
     }
 
     public Complaint(String fullName, String phoneNumber, String description) {
-        ID++;
-        this.id = ID;
+        CLASS_ID++;
+        this.id = CLASS_ID;
         this.time = LocalDateTime.parse(RegexHelper.getTimeDateNow(DateTimeFormatter.ISO_LOCAL_DATE_TIME));
         this.fullName = fullName;
         this.phoneNumber = phoneNumber;

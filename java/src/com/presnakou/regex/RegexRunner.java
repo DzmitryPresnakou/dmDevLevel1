@@ -4,17 +4,15 @@ import com.presnakou.regex.model.Complaint;
 import com.presnakou.regex.utils.RegexHelper;
 
 import java.io.File;
-import java.io.IOException;
 import java.nio.file.Path;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 
 public class RegexRunner {
 
-    public static void main(String[] args) throws IOException, InterruptedException {
+    public static void main(String[] args) {
 
         File complaints = Path.of("resources", "complaints.csv").toFile();
         List<Complaint> complaintsList = RegexHelper.getDataFromFile(complaints);
@@ -25,8 +23,7 @@ public class RegexRunner {
         System.out.println("Новая жалоба добавлена");
 
         ExecutorService threadPool = Executors.newFixedThreadPool(2);
-        Future<Integer> complaintHandling = threadPool.submit(() -> {
-
+        threadPool.submit(() -> {
             Thread.sleep(2000L);
             if (!complaintsList.isEmpty()) {
                 System.out.println("Старт считывания всех новых жалоб");
@@ -38,7 +35,7 @@ public class RegexRunner {
                 System.out.println("Обработка всех новых жалоб");
                 Thread.sleep(2000L);
             }
-            while (complaintsList.size() > 0) {
+            while (!complaintsList.isEmpty()) {
                 System.out.println("Обработка жалобы №" + complaintsList.size());
                 Thread.sleep(5000L);
                 RegexHelper.writeStringInFile(RegexHelper.processedString(complaintsList));
@@ -51,7 +48,11 @@ public class RegexRunner {
         });
 
         threadPool.shutdown();
-        threadPool.awaitTermination(1L, TimeUnit.HOURS);
+        try {
+            threadPool.awaitTermination(1L, TimeUnit.HOURS);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
 
         System.out.println("Работа завершена");
     }
